@@ -4,8 +4,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-airflow_app
-
+*.csv
 # C extensions
 *.so
 
