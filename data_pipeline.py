@@ -44,5 +44,43 @@ for i, row in df.iterrows():
         # bdf = bdf.append({'a_id': a_id, 'lat': lat, 'lon': lon, 'speed': speed, 'lon_acc': lon_acc, 'lat_acc': lat_acc, 'time': time}, ignore_index=True)
     
     # print(row)
+    print(f'{i} done!')
 
 print()
+
+
+# Assuming you have pandas installed (if used for data manipulation in original code)
+import pandas as pd
+import psycopg2
+
+HOST = "localhost"
+PORT = 5432  # Default PostgreSQL port
+DATABASE = "traffic"
+USERNAME = "postgres"
+PASSWORD = "12345"  # Replace with a strong password
+
+
+# Function to insert data into tables (assuming data is prepared in DataFrames)
+def insert_data_to_postgres(vehicle_data_df, trajectory_info_df):
+    # Connect to PostgreSQL (replace placeholders with actual connection details)
+    conn = psycopg2.connect(host=HOST, port=PORT, database=DATABASE, user=USERNAME, password=PASSWORD)
+    cur = conn.cursor()
+
+    # Insert data into vehicle_data
+    for index, row in vehicle_data_df.iterrows():
+        vehicle_data_id, type, traveled_d, avg_speed = row.values
+        cur.execute("INSERT INTO vehicle_data (vehicle_data_id, type, traveled_d, avg_speed) VALUES (%s, %s, %s, %s)",
+                    (vehicle_data_id, type, traveled_d, avg_speed))
+
+    # Insert data into trajectory_info
+    for index, row in trajectory_info_df.iterrows():
+        vehicle_data_id, lat, lon, speed, lon_acc, lat_acc, time = row.values
+        cur.execute("INSERT INTO trajectory_info (vehicle_data_id, lat, lon, speed, lon_acc, lat_acc, time) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                    (vehicle_data_id, lat, lon, speed, lon_acc, lat_acc, time))
+
+    conn.commit()  # Commit changes
+    cur.close()
+    conn.close()  # Close connection
+
+# Example usage (assuming you have your data in DataFrames)
+insert_data_to_postgres(vehicle_datadf, trajectory_infodf)
