@@ -41,28 +41,28 @@ for i, row in df.iterrows():
 
         trajectory_infodf = pd.concat([trajectory_infodf, new_df], ignore_index=True)
 
-        # bdf = bdf.append({'a_id': a_id, 'lat': lat, 'lon': lon, 'speed': speed, 'lon_acc': lon_acc, 'lat_acc': lat_acc, 'time': time}, ignore_index=True)
+        
     
-    # print(row)
+    
     print(f'{i} done!')
 
 print()
 
 
-# Assuming you have pandas installed (if used for data manipulation in original code)
+
 import pandas as pd
 import psycopg2
 
 HOST = "localhost"
-PORT = 5432  # Default PostgreSQL port
+PORT = 5433  # Default PostgreSQL port
 DATABASE = "traffic"
 USERNAME = "postgres"
-PASSWORD = "12345"  # Replace with a strong password
+PASSWORD = "postgres" 
 
 
-# Function to insert data into tables (assuming data is prepared in DataFrames)
+# Function to insert data into tables 
 def insert_data_to_postgres(vehicle_data_df, trajectory_info_df):
-    # Connect to PostgreSQL (replace placeholders with actual connection details)
+    # Connect to PostgreSQL 
     conn = psycopg2.connect(host=HOST, port=PORT, database=DATABASE, user=USERNAME, password=PASSWORD)
     cur = conn.cursor()
 
@@ -82,5 +82,5 @@ def insert_data_to_postgres(vehicle_data_df, trajectory_info_df):
     cur.close()
     conn.close()  # Close connection
 
-# Example usage (assuming you have your data in DataFrames)
+
 insert_data_to_postgres(vehicle_datadf, trajectory_infodf)
