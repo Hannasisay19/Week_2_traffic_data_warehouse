@@ -13,9 +13,6 @@ the livability and productivity of workers by creating a scalable data warehouse
 tech-stack that will help us provide the AI service to the client.
 
 
-## Challenges
-    Since I'm not familiar with the terms mentioned, combining Airflow, dbt, and Redash turned out to be tough because it needed a lot of time and resources. Setting up and connecting these different tools required careful planning of settings and connections, making the integration process more complicated.
-
 # steps to run the project 
 clone the project 
 ```
